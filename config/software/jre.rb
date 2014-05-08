@@ -25,20 +25,27 @@ whitelist_file "jre/bin/policytool"
 whitelist_file "jre/lib"
 whitelist_file "jre/plugin"
 
+relative_path "jre1.7.0_03"
+
 if OHAI.kernel['machine'] =~ /x86_64/
   # TODO: download x86 version on x86 machines
   source :url => "http://download.oracle.com/otn-pub/java/jdk/7u3-b04/jre-7u3-linux-x64.tar.gz",
          :md5 => "3d3e206cea84129f1daa8e62bf656a28",
          :cookie => 'oraclelicensejre-7u3-oth-JPR=accept-securebackup-cookie;gpw_e24=http://www.oracle.com/technetwork/java/javase/downloads/jre-7u3-download-1501631.html',
          :warning => "By including the JRE, you accept the terms of the Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX, which can be found at http://www.oracle.com/technetwork/java/javase/terms/license/index.html"
+elsif OHAI.kernel['machine'] =~ /arm/
+  # TODO: add support for soft float abi
+  source :url => "http://download.oracle.com/otn-pub/java/jdk/7u55-b13/jdk-7u55-linux-arm-vfp-hflt.tar.gz",
+         :md5 => "a1461e85c749030f077291493169d580",
+         :cookie => 'oraclelicense=accept-securebackup-cookie;gpw_e24=http://www.oracle.com/technetwork/java/javase/downloads/jdk7-arm-downloads-2187468.html',
+         :warning => "By including the JRE, you accept the terms of the Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX, which can be found at http://www.oracle.com/technetwork/java/javase/terms/license/index.html"
+  relative_path "jdk1.7.0_55/jre"
 else
   source :url => "http://download.oracle.com/otn-pub/java/jdk/7u3-b04/jre-7u3-linux-i586.tar.gz",
          :md5 => "cfce10a05f8d152d39aef892f2cd4011",
          :cookie => 'oraclelicensejre-7u3-oth-JPR=accept-securebackup-cookie;gpw_e24=http://www.oracle.com/technetwork/java/javase/downloads/jre-7u3-download-1501631.html',
          :warning => "By including the JRE, you accept the terms of the Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX, which can be found at http://www.oracle.com/technetwork/java/javase/terms/license/index.html"
 end
-
-relative_path "jre1.7.0_03"
 
 jre_dir = "#{install_dir}/embedded/jre"
 
