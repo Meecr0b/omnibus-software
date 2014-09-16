@@ -39,7 +39,7 @@ build do
 
   # On 64-bit centos, libffi libraries are places under /embedded/lib64
   # move them over to lib
-  if rhel? && _64_bit?
+  if (rhel? or suse?) and _64_bit?
     command "mv #{install_dir}/embedded/lib64/* #{install_dir}/embedded/lib/"
     command "rm -rf #{install_dir}/embedded/lib64"
   end
