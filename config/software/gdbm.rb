@@ -49,6 +49,10 @@ build do
   if Ohai['platform'] == "freebsd"
     configure_command << "--with-pic"
   end
+  
+  if Ohai['platform'] =~ /suse/
+    command "cp -f /usr/lib64/libgdbm*.so.3 #{install_dir}/embedded/lib"
+  end
 
   command configure_command.join(" "), :env => env
   command "make -j #{max_build_jobs}", :env => env
