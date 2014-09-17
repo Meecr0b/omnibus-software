@@ -50,7 +50,7 @@ build do
     configure_command << "--with-pic"
   end
   
-  if Ohai['platform'] =~ /suse/
+  if suse? and _64_bit?
     command "cp -f /usr/lib64/libgdbm*.so.3 #{install_dir}/embedded/lib"
   end
 
